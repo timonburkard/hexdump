@@ -18,6 +18,25 @@ This produces the executable at the workspace root as `hexdump` resp. `hexdump.e
 $ ./hexdump show <input_file>
 ```
 
+### Options
+
+<pre>
+$ ./hexdump show --help
+Print hex dump of a file
+
+<u>Usage:</u> hexdump show &lt;FILE&gt; [OPTIONS]
+
+<u>Arguments:</u>
+  &lt;FILE&gt;  File to hex dump or '-' for stdin
+
+<u>Options:</u>
+      --offset &lt;BYTES&gt;  Byte offset to start reading from
+      --length &lt;BYTES&gt;  Maximum number of bytes to print
+      --width  &lt;BYTES&gt;  Number of bytes per line
+  -h, --help            Print help
+
+</pre>
+
 ## Example
 
 ```sh
