@@ -61,5 +61,6 @@ $ ./hexdump show file.bin
 
 ```sh
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+cmake --build build
 ctest --test-dir build --output-on-failure
 ```
