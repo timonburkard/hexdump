@@ -89,8 +89,12 @@ clic_err_t show(clic_res_t* result)
 
         printf("%08llX  ", (unsigned long long)address);
 
-        for (size_t i = 0; i < bytes_read; ++i) {
-            printf("%02X ", buffer[i]);
+        for (size_t i = 0; i < BYTES_PER_LINE; ++i) {
+            if (i < bytes_read) {
+                printf("%02X ", buffer[i]);
+            } else {
+                printf("   ");
+            }
         }
 
         printf(" |");
