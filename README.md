@@ -18,6 +18,25 @@ This produces the executable at the workspace root as `hexdump` resp. `hexdump.e
 $ ./hexdump show <input_file>
 ```
 
+### Options
+
+<pre>
+$ ./hexdump show --help
+Print hex dump of a file
+
+<u>Usage:</u> hexdump show &lt;FILE&gt; [OPTIONS]
+
+<u>Arguments:</u>
+  &lt;FILE&gt;  File to hex dump or '-' for stdin
+
+<u>Options:</u>
+      --offset &lt;BYTES&gt;  Byte offset to start reading from
+      --length &lt;BYTES&gt;  Maximum number of bytes to print
+      --width  &lt;BYTES&gt;  Number of bytes per line
+  -h, --help            Print help
+
+</pre>
+
 ## Example
 
 ```sh
@@ -36,4 +55,11 @@ $ ./hexdump show file.bin
 00011460  6C 69 67 68 74 00 5F 5F 70 5F 5F 5F 77 61 72 67  |light.__p___warg|
 00011470  76 00 5F 5F 6D 69 6E 67 77 5F 61 70 70 5F 74 79  |v.__mingw_app_ty|
 00011480  70 65 00                                         |pe.|
+```
+
+## Test
+
+```sh
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+ctest --test-dir build --output-on-failure
 ```
