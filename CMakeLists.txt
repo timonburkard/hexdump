@@ -35,3 +35,9 @@ set_target_properties(hexdump PROPERTIES
     C_EXTENSIONS OFF
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}
 )
+
+include(CTest)
+
+if(BUILD_TESTING)
+    add_subdirectory(test)
+endif()
