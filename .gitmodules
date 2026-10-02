@@ -1,0 +1,3 @@
+[submodule "ext/clic"]
+	path = ext/clic
+	url = https://github.com/timonburkard/clic
