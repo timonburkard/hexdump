@@ -81,10 +81,15 @@ clic_err_t show(clic_res_t* result)
     do {
         bytes_read = fread(buffer, 1, BYTES_PER_LINE, file);
 
-        if ((bytes_read == 0) && ferror(file)) {
-            fprintf(stderr, "Error: Could not read from file '%s'\n", result->argv[ARG_ID_NAME]);
+        if (bytes_read == 0) {
+            if (ferror(file)) {
+                fprintf(stderr, "Error: Could not read from file '%s'\n", result->argv[ARG_ID_NAME]);
+                fclose(file);
+                return CLIC_ERR_GENERAL;
+            }
+
             fclose(file);
-            return CLIC_ERR_GENERAL;
+            return CLIC_ERR_OK;
         }
 
         printf("%08llX  ", (unsigned long long)address);
