@@ -58,7 +58,7 @@ int main(int argc, char** argv)
 
 void print_as_char(uint8_t byte)
 {
-    if ((byte >= 32) && byte <= 126) {
+    if (isprint(byte)) {
         printf("%c", (char)byte);
     } else {
         printf(".");
