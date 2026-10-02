@@ -56,3 +56,10 @@ $ ./hexdump show file.bin
 00011470  76 00 5F 5F 6D 69 6E 67 77 5F 61 70 70 5F 74 79  |v.__mingw_app_ty|
 00011480  70 65 00                                         |pe.|
 ```
+
+## Test
+
+```sh
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+ctest --test-dir build --output-on-failure
+```
