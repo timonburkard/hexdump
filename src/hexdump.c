@@ -1,8 +1,10 @@
 /*** Includes ****************************************************************/
 
 #include <ctype.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "clic.h"
 
@@ -70,8 +72,15 @@ clic_err_t show(clic_res_t* result)
     size_t  bytes_read;
     size_t  address = 0;
     uint8_t buffer[BYTES_PER_LINE];
+    FILE*   file;
+    bool    close_file = true;
 
-    FILE* file = fopen(result->argv[ARG_ID_NAME], "rb");
+    if (strcmp(result->argv[ARG_ID_NAME], "-") == 0) {
+        file       = stdin;
+        close_file = false;
+    } else {
+        file = fopen(result->argv[ARG_ID_NAME], "rb");
+    }
 
     if (file == NULL) {
         fprintf(stderr, "Error: Could not open file '%s'\n", result->argv[ARG_ID_NAME]);
@@ -84,11 +93,16 @@ clic_err_t show(clic_res_t* result)
         if (bytes_read == 0) {
             if (ferror(file)) {
                 fprintf(stderr, "Error: Could not read from file '%s'\n", result->argv[ARG_ID_NAME]);
-                fclose(file);
+                if (close_file) {
+                    fclose(file);
+                }
                 return CLIC_ERR_GENERAL;
             }
 
-            fclose(file);
+            if (close_file) {
+                fclose(file);
+            }
+
             return CLIC_ERR_OK;
         }
 
@@ -114,6 +128,9 @@ clic_err_t show(clic_res_t* result)
 
     } while (bytes_read == BYTES_PER_LINE);
 
-    fclose(file);
+    if (close_file) {
+        fclose(file);
+    }
+
     return CLIC_ERR_OK;
 }
